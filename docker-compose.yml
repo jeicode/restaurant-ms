@@ -1,0 +1,3 @@
+networks:
+  restaurant-net:
+    external: true

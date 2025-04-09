@@ -1,0 +1,14 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: always
+    networks: restaurant-net
+
+networks:
+  restaurant-net:
+    external: true

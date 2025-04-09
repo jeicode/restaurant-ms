@@ -1,0 +1,26 @@
+{
+  "name": "order-management-ms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "node --watch -r ts-node/register src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "jeicode",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0",
+  "devDependencies": {
+    "@types/node": "22.14.0",
+    "dotenv": "^16.4.7",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.3",
+    "vitest": "3.1.1"
+  },
+  "dependencies": {
+    "env-var": "7.5.0"
+  }
+}
