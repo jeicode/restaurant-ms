@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "amqplib": "0.10.7",
-    "env-var": "7.5.0"
+    "env-var": "7.5.0",
+    "yup": "1.6.1"
   }
 }
