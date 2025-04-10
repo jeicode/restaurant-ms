@@ -1,0 +1,37 @@
+{
+  "name": "kitchen-ms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "prisma": {
+    "seed": "ts-node src/config/seed.ts"
+  },
+  "scripts": {
+    "dev": "npx prisma migrate dev && npm run seed && tsnd --respawn --clear src/index.ts",
+    "seed": "npx prisma db seed",
+    "build": "tsc",
+    "test": "vitest",
+    "migrate:prod": "npx prisma migrate deploy",
+    "start": "npm run seed && pnpm run migrate:prod && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "jeicode",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0",
+  "devDependencies": {
+    "@types/amqplib": "0.10.7",
+    "@types/node": "22.14.0",
+    "dotenv": "^16.4.7",
+    "prisma": "6.6.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.8.3",
+    "vitest": "3.1.1"
+  },
+  "dependencies": {
+    "@prisma/client": "6.6.0",
+    "amqplib": "0.10.7",
+    "env-var": "7.5.0",
+    "uuid": "11.1.0"
+  }
+}

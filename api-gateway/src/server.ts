@@ -2,8 +2,8 @@
 import http from 'http';
 import { setupRabbitMQ } from './config/rabbitmq';
 import { kitchenOrderController } from './controllers/kitchen-order.controller';
+import { contentType } from './constants/http';
 
-const contentType = { 'Content-Type': 'application/json' }
 const QUEUE_NAME = 'kitchen_orders';
 type ServerOptions = {
     PORT: number;

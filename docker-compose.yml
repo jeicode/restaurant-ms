@@ -1,3 +1,40 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.1.0-rc.1-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # Exponer AMQP para los servicios locales
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - restaurant-net
+  
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: api-gateway
+      dockerfile: Dockerfile
+    env_file: api-gateway/.env
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - restaurant-net
+
+    depends_on:
+      - rabbitmq
+
+  # kitchen-ms:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   env_file: kitchen-ms/.env
+  #   ports:
+  #     - "3000:3000"
+  #   restart: always
+  #   networks: restaurant-net
+
 networks:
   restaurant-net:
-    external: true
+    driver: bridge

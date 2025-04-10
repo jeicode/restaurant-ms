@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ingredient {
+  id        Int                @id @default(autoincrement())
+  name      String             @unique @db.VarChar(255)
+  published Boolean?           @default(true)
+  createdAt DateTime?          @default(now())
+  updatedAt DateTime?          @updatedAt()
+  recipes   RecipeIngredient[] // relación con tabla intermedia
+}
+
+model Recipe {
+  id          Int                @id @default(autoincrement())
+  name        String             @unique @db.VarChar(255)
+  ingredients RecipeIngredient[] // relación con tabla intermedia
+  published   Boolean?           @default(true)
+  createdAt   DateTime?          @default(now())
+  updatedAt   DateTime?          @updatedAt()
+}
+
+model RecipeIngredient {
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  quantity     Int // cantidad del ingrediente en la receta
+
+  @@id([recipeId, ingredientId]) // clave compuesta
+}

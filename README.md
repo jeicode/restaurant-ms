@@ -8,7 +8,5 @@
 
 ## 🚀 Inicialización del entorno
 
-### 1. Crear red Docker para conectar los servicios
-
 ```bash
-docker network create restaurant-net
+docker-compose up -d
