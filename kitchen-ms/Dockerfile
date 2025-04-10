@@ -8,14 +8,21 @@ FROM base AS deps
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile
 
+
 # Etapa de construcción
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm run build
+RUN pnpm run generate \
+  && pnpm run build \
+  && pnpm run migrate:prod \
+  && pnpm run seed
 
 # Etapa final
 FROM base AS final
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/src/prisma-client ./src/prisma-client
+
 CMD ["node", "dist/index.js"]

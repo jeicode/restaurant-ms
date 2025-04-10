@@ -7,12 +7,14 @@
     "seed": "ts-node src/config/seed.ts"
   },
   "scripts": {
-    "dev": "npx prisma migrate dev && npm run seed && tsnd --respawn --clear src/index.ts",
+    "dev": "tsnd --respawn --clear src/index.ts",
     "seed": "npx prisma db seed",
     "build": "tsc",
     "test": "vitest",
+    "generate": "npx prisma generate",
+    "migrate:dev": "npx prisma migrate dev",
     "migrate:prod": "npx prisma migrate deploy",
-    "start": "npm run seed && pnpm run migrate:prod && node dist/index.js"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "jeicode",
