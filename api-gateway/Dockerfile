@@ -5,7 +5,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Etapa de dependencias
 FROM base AS deps
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile
 
 # Etapa de construcción
@@ -18,4 +18,7 @@ RUN pnpm run build
 FROM base AS final
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY .env .env
 CMD ["node", "dist/index.js"]
+
+EXPOSE ${PORT}
