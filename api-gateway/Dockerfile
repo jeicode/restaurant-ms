@@ -21,4 +21,4 @@ COPY --from=build /app/dist ./dist
 COPY .env .env
 CMD ["node", "dist/index.js"]
 
-EXPOSE ${PORT}
+EXPOSE 3000
