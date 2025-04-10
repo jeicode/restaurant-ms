@@ -18,7 +18,7 @@ RUN pnpm run build
 FROM base AS final
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
-# COPY .env /app/.env
+
 CMD ["node", "dist/index.js"]
 
 EXPOSE 3000

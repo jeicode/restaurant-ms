@@ -1,5 +1,6 @@
 import amqp from 'amqplib';
 import { environment } from './enviroment';
+import { logError, logInfo } from '../shared/utils/logs.utils';
 
 
 const RABBITMQ_URL = environment.RABBITMQ_URL;
@@ -13,9 +14,9 @@ export async function setupRabbitMQ({QUEUE_NAME}: RabbitMQOptions) {
       const connection = await amqp.connect(RABBITMQ_URL);
       channel = await connection.createChannel();
       await channel.assertQueue(QUEUE_NAME, { durable: true });
-      console.log('[x] Conectado a RabbitMQ');
+      logInfo('Conectado a RabbitMQ');
     } catch (err) {
-      console.error('❌ Error conectando a RabbitMQ:', err);
+      logError('❌ Error conectando a RabbitMQ:', err);
       process.exit(1);
     }
 }
