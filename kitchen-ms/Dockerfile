@@ -13,11 +13,7 @@ RUN pnpm i --frozen-lockfile
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm run generate \
-  && pnpm run build \
-  && pnpm run migrate:prod \
-  && pnpm run seed
-
+RUN pnpm run generate && pnpm run build
 # Etapa final
 FROM base AS final
 COPY --from=deps /app/node_modules ./node_modules
