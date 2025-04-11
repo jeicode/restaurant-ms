@@ -1,6 +1,6 @@
 import { environment } from "./config/enviroment";
-import { consumeOrders } from "./consumer";
+import { consumeOrderHistory } from "./consumer";
 import { runServer } from "./server";
-consumeOrders();
 
+consumeOrderHistory();
 runServer({ PORT: environment.PORT });
