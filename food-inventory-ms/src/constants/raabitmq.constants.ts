@@ -1,0 +1,1 @@
+export const ORDER_QUEUE_NAME = 'kitchen_orders';
